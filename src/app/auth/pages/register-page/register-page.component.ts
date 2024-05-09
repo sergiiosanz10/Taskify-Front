@@ -19,12 +19,22 @@ export class RegisterPageComponent {
     name:    ['', [Validators.required]],
     email:    ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
+    password2: ['', [Validators.required]],
+  }, {
+    validators: [
+      this.authService.isFieldOneEqualFieldTwo('password', 'password2'),
+    ]
   })
 
 
   register(){
 
-    const {name, email, password} = this.myForm.value;
+    const {name, email, password, password2} = this.myForm.value;
+
+    if (password !== password2) {
+      Swal.fire('Error', 'Las contraseñas no coinciden', 'error');
+      return;
+    }
 
     this.authService.register(name, email, password)
       .subscribe( {

@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environments';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { User, AuthStatus, LoginResponse, CheckTokenResponse, RegisterResponse } from '../interfaces';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 
 @Injectable({
@@ -54,6 +55,27 @@ export class AuthService {
         catchError(err => throwError(() => err.error.message)
         )
       )
+  }
+
+  isFieldOneEqualFieldTwo(field1: string, field2:string){
+
+    return (formGroup: AbstractControl):ValidationErrors | null => {
+
+      const fieldValue1 = formGroup.get(field1)?.value;
+      const fieldValue2 = formGroup.get(field2)?.value;
+
+      if (fieldValue1 !== fieldValue2) {
+
+        formGroup.get(field2)?.setErrors({notEqual: true});
+        return {notEqual: true}
+      }
+
+      formGroup.get(field2)?.setErrors(null);
+      return null;
+
+    }
+
+
   }
 
   checkAuthStatus(): Observable<boolean> {
