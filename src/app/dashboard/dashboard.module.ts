@@ -3,15 +3,25 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
+import { SharedModule } from '../shared/shared.module';
+import { TareasAsignadasComponent } from './components/tareas-asignadas/tareas-asignadas.component';
+import { TareasPendientesComponent } from './components/tareas-pendientes/tareas-pendientes.component';
+import { TareasCompletadasComponent } from './components/tareas-completadas/tareas-completadas.component';
+import { CalendarioComponent } from './components/calendario/calendario.component';
 
 
 @NgModule({
   declarations: [
-    DashboardLayoutComponent
+    DashboardLayoutComponent,
+    TareasAsignadasComponent,
+    TareasPendientesComponent,
+    TareasCompletadasComponent,
+    CalendarioComponent
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    SharedModule
   ]
 })
 export class DashboardModule { }
