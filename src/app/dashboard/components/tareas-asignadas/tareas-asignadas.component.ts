@@ -28,6 +28,7 @@ export class TareasAsignadasComponent implements OnInit {
 
   ngOnInit() {
     this.loadTasks();
+
   }
 
   loadTasks() {
@@ -35,7 +36,8 @@ export class TareasAsignadasComponent implements OnInit {
     if (!token) return;
 
     this.DashboardService.getTasks(token)
-      .subscribe(tasks => this.tasksList = tasks);
+      .subscribe(tasks => {this.tasksList = tasks, console.log(tasks)});
+
   }
 
   newTask(){
@@ -45,6 +47,16 @@ export class TareasAsignadasComponent implements OnInit {
       .subscribe( task => {this.tasksList.push(task), console.log(task)});
 
     this.myForm.reset();
+  }
+
+  deleteTask(id: string){
+    const token = sessionStorage.getItem('token');
+    if (!token) return;
+
+    this.DashboardService.deleteTask(id, token)
+      .subscribe(() => {
+        this.tasksList = this.tasksList.filter(task => task.taskId !== id);
+      });
   }
 
   isValidField(field: string){

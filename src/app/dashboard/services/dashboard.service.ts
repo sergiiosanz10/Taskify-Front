@@ -24,7 +24,7 @@ export class DashboardService {
 
     const url = `${this.baseUrl}/dashboard/tareas-asignadas`;
     const body = { label, name, description, time_start, time_end, date, status: false, color, userId: userId }
-    
+
     return this.http.post<TaskResponse>(url, body).pipe(
       map(response => {
         // Transforma la respuesta aquí si es necesario
@@ -35,6 +35,11 @@ export class DashboardService {
         return throwError(() => err.error.message);
       })
     );
+  }
+
+  deleteTask(id: string, token: string): Observable<void> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete<void>(`${this.baseUrl}/dashboard/tareas-asignadas/${id}`, { headers });
   }
 
   getTasks(token: string): Observable<TaskResponse[]> {

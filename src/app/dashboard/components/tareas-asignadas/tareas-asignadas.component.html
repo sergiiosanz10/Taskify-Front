@@ -58,7 +58,7 @@
         <input type="color" class="form-control form color" list="color-datalist" [value]="task.color">
         <button class="btn btn-primary mx-1"><i class="fas fa-palette mx-1"></i></button>
         <button class="btn btn-warning text-white mx-1"><i class="fas fa-clock mx-1"></i></button>
-        <button class="btn btn-danger mx-1"><i class="fas fa-trash mx-1"></i></button>
+        <button class="btn btn-danger mx-1" (click)="deleteTask(task.taskId)"><i class="fas fa-trash mx-1"></i></button>
       </div>
     </div>
   </div>
