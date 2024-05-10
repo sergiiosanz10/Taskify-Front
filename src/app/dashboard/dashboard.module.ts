@@ -8,6 +8,7 @@ import { TareasAsignadasComponent } from './components/tareas-asignadas/tareas-a
 import { TareasPendientesComponent } from './components/tareas-pendientes/tareas-pendientes.component';
 import { TareasCompletadasComponent } from './components/tareas-completadas/tareas-completadas.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CalendarioComponent } from './components/calendario/calendario.componen
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModule { }

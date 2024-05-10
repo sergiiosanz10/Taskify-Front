@@ -12,7 +12,7 @@ const routes: Routes = [
     component: DashboardLayoutComponent,
     children: [
       {
-        path: '',
+        path: 'tareas-asignadas',
         component: TareasAsignadasComponent
       },
       {
@@ -27,6 +27,11 @@ const routes: Routes = [
         path: 'calendario',
         component: CalendarioComponent
       },
+      {
+        path: '**',
+        redirectTo: 'tareas-asignadas',
+        pathMatch: 'full'
+      }
     ]
   }
 ];
