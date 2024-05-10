@@ -28,6 +28,7 @@ export class AuthService {
     this._currentUser.set(user);
     this._authStatus.set(AuthStatus.authenticated);
     sessionStorage.setItem('token', token);
+    sessionStorage.setItem('userId', user._id);
     return true
   }
 
