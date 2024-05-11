@@ -1,29 +1,54 @@
 <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="tareas-asignadas">Taskify</a>
+    <a class="navbar-brand mx-5" routerLink="tareas-asignadas"><span class="logo"><span class='taski'>Taski</span>fy</span></a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
 
       <ul class="navbar-nav d-flex justify-content-center">
         <li class="nav-item mx-5">
           <a class="nav-link" routerLink="tareas-asignadas" routerLinkActive="active" >Tareas</a>
         </li>
         <li class="nav-item mx-5">
-          <a class="nav-link" routerLink="tareas-pendientes" routerLinkActive="active"  >Tareas Pendientes</a>
+          <a class="nav-link" routerLink="tareas-pendientes" routerLinkActive="active"  >Tareas pendientes</a>
         </li>
         <li class="nav-item mx-5">
           <a class="nav-link" routerLink="tareas-completadas" routerLinkActive="active"  >Tareas completadas</a>
         </li>
         <li class="nav-item mx-5">
-          <a class="nav-link" routerLink="calendario" routerLinkActive="active"  >Calendario</a>
+          <a class="nav-link" routerLink="calendario" routerLinkActive="active">Calendario</a>
         </li>
         <li class="nav-item mx-5">
-          <button  class="nav-link"(click)="onLogout()">Cerrar sesión</button>
+          <label for="toggle" id="toggle-label" class='dark-mode-button'>
+            <div id="toggle-div">
+                <input type="checkbox" id="toggle" onChange={toggleDarkMode} />
+                <div class="clouds">
+                    <div class="cloud cloud-1"></div>
+                    <div class="cloud cloud-2"></div>
+                    <div class="cloud cloud-3"></div>
+                    <div class="cloud cloud-4"></div>
+                    <div class="cloud cloud-5"></div>
+                </div>
+                <div class="backdrops">
+                    <div class="backdrop"></div>
+                </div>
+                <div class="stars">
+                    <div class="star star-1"></div>
+                    <div class="star star-2"></div>
+                    <div class="star star-3"></div>
+                </div>
+                <div class="sun-moon">
+                    <div class="crater"></div>
+                </div>
+            </div>
+        </label>
+        </li>
+        <li class="nav-item mx-5 mt-sm-0 mt-3">
+          <button class="nav-link logout"(click)="onLogout()">Cerrar sesión</button>
         </li>
 
       </ul>

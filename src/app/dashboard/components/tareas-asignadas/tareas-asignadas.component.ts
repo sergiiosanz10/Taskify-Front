@@ -36,7 +36,7 @@ export class TareasAsignadasComponent implements OnInit {
     if (!token) return;
 
     this.DashboardService.getTasks(token)
-      .subscribe(tasks => {this.tasksList = tasks, console.log(tasks)});
+      .subscribe(tasks => this.tasksList = tasks);
 
   }
 
