@@ -34,12 +34,12 @@
   border: 2px solid #f1f1f1;
 }
 
-a {
+.items {
   position: relative;
   text-decoration: none;
 }
 
-a::after {
+.items::after {
   content: '';
   position: absolute;
   width: 0;
@@ -51,7 +51,7 @@ a::after {
   transition: all 0.3s ease-in-out;
 }
 
-a:hover::after {
+.items:hover::after {
   visibility: visible;
   width: 100%;
 }
