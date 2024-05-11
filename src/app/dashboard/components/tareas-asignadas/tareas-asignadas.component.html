@@ -65,45 +65,46 @@
   <!-- Task Container -->
   <div class="tareasContainer m-4">
     <div class="card mt-3" *ngFor="let task of tasksList">
-      <form (change)="modifyTask(task.taskId)">
 
         <div class="card-body d-flex flex-wrap" >
           <div>
             <span class="label-input100">Etiqueta</span>
-            <input type="text" class="form-control form" placeholder="Etiqueta" [value]="task.label">
+            <input type="text" class="form-control form" placeholder="Etiqueta" [value]="task.label" [(ngModel)]="task.label" (change)="modifyTask(task)">
           </div>
           <div>
             <span class="label-input100">Nombre</span>
-            <input type="text" class="form-control form" placeholder="Nombre" [value]="task.name">
+            <input type="text" class="form-control form" placeholder="Nombre" [value]="task.name" [(ngModel)]="task.name" (change)="modifyTask(task)">
           </div>
           <div>
             <span class="label-input100">Descripción</span>
-            <input type="text" class="form-control form" placeholder="Descripción" [value]="task.description">
+            <input type="text" class="form-control form" placeholder="Descripción" [value]="task.description" [(ngModel)]="task.description" (change)="modifyTask(task)">
           </div>
           <div>
             <span class="label-input100">Hora comienzo</span>
-            <input type="time" class="form-control time" [value]="task.time_start">
+            <input type="time" class="form-control time" [value]="task.time_start" [(ngModel)]="task.time_start" (change)="modifyTask(task)">
           </div>
           <div>
             <span class="label-input100">Hora fin</span>
-            <input type="time" class="form-control time" [value]="task.time_end">
+            <input type="time" class="form-control time" [value]="task.time_end" [(ngModel)]="task.time_end" (change)="modifyTask(task)">
           </div>
           <div>
             <span class="label-input100">Fecha</span>
-            <input type="date" class="form-control form" [value]="task.date">
+            <input type="date" class="form-control form" [value]="task.date" [(ngModel)]="task.date" (change)="modifyTask(task)">
           </div>
           <div>
             <span class="label-input100">Color</span>
-            <input type="color" class="form-control form color" list="color-datalist" [value]="task.color">
+            <input type="color" class="form-control form color" list="color-datalist" [value]="task.color" [(ngModel)]="task.color" (change)="modifyTask(task)">
           </div>
           <div class="button-group d-flex align-items-end mb-2">
             <button class="btn btn-primary mx-1"><i class="fas fa-palette mx-1"></i></button>
-            <button class="btn btn-warning text-white mx-1"><i class="fas fa-clock mx-1"></i></button>
+            <button [ngClass]="{'btn-success': task.status, 'btn-warning': !task.status}" class="btn text-white mx-1" (click)="task.status = !task.status; modifyTask(task)">
+              <i *ngIf="!task.status" class="fa-solid fa-clock mx-1"></i>
+              <i *ngIf="task.status" class="fa-solid fa-check mx-1"></i>
+            </button>
             <button class="btn btn-danger mx-1" (click)="deleteTask(task.taskId)"><i
                 class="fas fa-trash mx-1"></i></button>
           </div>
         </div>
-      </form>
     </div>
   </div>
 </div>

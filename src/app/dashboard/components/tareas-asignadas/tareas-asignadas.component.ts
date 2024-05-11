@@ -16,15 +16,16 @@ export class TareasAsignadasComponent implements OnInit {
   public tasksList: TaskResponse[] = [];
 
   public myForm: FormGroup = this.fb.group({
-    label:        [''],
-    name:         ['', [Validators.required]],
-    description:  [''],
-    time_start:   [''],
-    time_end:     [''],
-    date:         [''],
-    color:        [''],
-    status:       [false],
+    label: [''],
+    name: ['', [Validators.required]],
+    description: [''],
+    time_start: [''],
+    time_end: [''],
+    date: [''],
+    color: [''],
+    status: [false],
   })
+
 
   ngOnInit() {
     this.loadTasks();
@@ -39,16 +40,16 @@ export class TareasAsignadasComponent implements OnInit {
 
   }
 
-  newTask(){
+  newTask() {
     const taskData = this.myForm.value;
 
     this.DashboardService.newTask(taskData)
-      .subscribe( task => {this.tasksList.push(task), console.log(task)});
+      .subscribe(task => { this.tasksList.push(task), console.log(task) });
 
     this.myForm.reset();
   }
 
-  deleteTask(id: string){
+  deleteTask(id: string) {
     const token = sessionStorage.getItem('token');
     if (!token) return;
 
@@ -58,19 +59,21 @@ export class TareasAsignadasComponent implements OnInit {
       });
   }
 
-  modifyTask(id: string){
+  modifyTask(task: TaskResponse) {
     const token = sessionStorage.getItem('token');
-    const taskData = this.myForm.value;
 
     if (!token) return;
 
-    this.DashboardService.modifyTask(id, token, taskData)
-      .subscribe(() => {
-        this.tasksList = this.tasksList.filter(task => task.taskId !== id);
+    this.DashboardService.modifyTask(token, task)
+      .subscribe(updatedTask => {
+        const index = this.tasksList.findIndex(t => t.taskId === updatedTask.taskId);
+        if (index !== -1) {
+          this.tasksList[index] = updatedTask;
+        }
       });
   }
 
-  isValidField(field: string){
+  isValidField(field: string) {
     return this.DashboardService.isValidField(this.myForm, field)
   }
 

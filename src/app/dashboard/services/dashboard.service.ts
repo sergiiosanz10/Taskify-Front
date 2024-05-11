@@ -36,13 +36,13 @@ export class DashboardService {
     return this.http.delete<void>(`${this.baseUrl}/dashboard/tareas-asignadas/${id}`, { headers });
   }
 
-  modifyTask(id: string, token: string, taskData:TaskResponse): Observable<TaskResponse> {
+  modifyTask(token: string, taskData:TaskResponse): Observable<TaskResponse> {
     const userId = sessionStorage.getItem('userId');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    const {label, name, description, time_start, time_end, date, status, color} = taskData;
+    const {label, name, description, time_start, time_end, date, status, color, taskId} = taskData;
     const body = {userId, label, name, description, time_start, time_end, date, status, color };
 
-    return this.http.patch<TaskResponse>(`${this.baseUrl}/dashboard/tareas-asignadas/${id}`, body, { headers }).pipe(
+    return this.http.patch<TaskResponse>(`${this.baseUrl}/dashboard/tareas-asignadas/${taskId}`, body, { headers }).pipe(
       catchError(err => {
         console.error('There was an error!', err);
         return throwError(() => err.error.message);
