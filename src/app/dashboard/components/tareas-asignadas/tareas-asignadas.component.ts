@@ -28,7 +28,6 @@ export class TareasAsignadasComponent implements OnInit {
 
   ngOnInit() {
     this.loadTasks();
-
   }
 
   loadTasks() {
@@ -41,9 +40,9 @@ export class TareasAsignadasComponent implements OnInit {
   }
 
   newTask(){
-    const {label, name, description, time_start, time_end, date, color } = this.myForm.value;
+    const taskData = this.myForm.value;
 
-    this.DashboardService.newTask(label, name, description, time_start, time_end, date, color)
+    this.DashboardService.newTask(taskData)
       .subscribe( task => {this.tasksList.push(task), console.log(task)});
 
     this.myForm.reset();
@@ -54,6 +53,18 @@ export class TareasAsignadasComponent implements OnInit {
     if (!token) return;
 
     this.DashboardService.deleteTask(id, token)
+      .subscribe(() => {
+        this.tasksList = this.tasksList.filter(task => task.taskId !== id);
+      });
+  }
+
+  modifyTask(id: string){
+    const token = sessionStorage.getItem('token');
+    const taskData = this.myForm.value;
+
+    if (!token) return;
+
+    this.DashboardService.modifyTask(id, token, taskData)
       .subscribe(() => {
         this.tasksList = this.tasksList.filter(task => task.taskId !== id);
       });

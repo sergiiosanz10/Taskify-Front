@@ -17,19 +17,13 @@ export class DashboardService {
   constructor() { }
 
 
-  newTask(label: string, name: string, description: string, time_start: string, time_end: string, date: string, color: string): Observable<TaskResponse> {
-
-    const userId = sessionStorage.getItem('userId'); // Recupera la ID del usuario del localStorage
-
-
+  newTask(taskData: TaskResponse ): Observable<TaskResponse> {
+    const userId = sessionStorage.getItem('userId');
     const url = `${this.baseUrl}/dashboard/tareas-asignadas`;
-    const body = { label, name, description, time_start, time_end, date, status: false, color, userId: userId }
+    const {label, name, description, time_start, time_end, date, status, color} = taskData;
+    const body = { userId, label, name, description, time_start, time_end, date, status, color };
 
     return this.http.post<TaskResponse>(url, body).pipe(
-      map(response => {
-        // Transforma la respuesta aquí si es necesario
-        return response;
-      }),
       catchError(err => {
         console.error('There was an error!', err);
         return throwError(() => err.error.message);
@@ -40,6 +34,20 @@ export class DashboardService {
   deleteTask(id: string, token: string): Observable<void> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.delete<void>(`${this.baseUrl}/dashboard/tareas-asignadas/${id}`, { headers });
+  }
+
+  modifyTask(id: string, token: string, taskData:TaskResponse): Observable<TaskResponse> {
+    const userId = sessionStorage.getItem('userId');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const {label, name, description, time_start, time_end, date, status, color} = taskData;
+    const body = {userId, label, name, description, time_start, time_end, date, status, color };
+
+    return this.http.patch<TaskResponse>(`${this.baseUrl}/dashboard/tareas-asignadas/${id}`, body, { headers }).pipe(
+      catchError(err => {
+        console.error('There was an error!', err);
+        return throwError(() => err.error.message);
+      })
+    );
   }
 
   getTasks(token: string): Observable<TaskResponse[]> {

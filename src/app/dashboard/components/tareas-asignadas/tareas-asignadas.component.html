@@ -64,8 +64,10 @@
 
   <!-- Task Container -->
   <div class="tareasContainer m-4">
-      <div class="card mt-3" *ngFor="let task of tasksList">
-        <div class="card-body d-flex flex-wrap ">
+    <div class="card mt-3" *ngFor="let task of tasksList">
+      <form (change)="modifyTask(task.taskId)">
+
+        <div class="card-body d-flex flex-wrap" >
           <div>
             <span class="label-input100">Etiqueta</span>
             <input type="text" class="form-control form" placeholder="Etiqueta" [value]="task.label">
@@ -97,9 +99,11 @@
           <div class="button-group d-flex align-items-end mb-2">
             <button class="btn btn-primary mx-1"><i class="fas fa-palette mx-1"></i></button>
             <button class="btn btn-warning text-white mx-1"><i class="fas fa-clock mx-1"></i></button>
-            <button class="btn btn-danger mx-1" (click)="deleteTask(task.taskId)"><i class="fas fa-trash mx-1"></i></button>
+            <button class="btn btn-danger mx-1" (click)="deleteTask(task.taskId)"><i
+                class="fas fa-trash mx-1"></i></button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
+  </div>
 </div>
