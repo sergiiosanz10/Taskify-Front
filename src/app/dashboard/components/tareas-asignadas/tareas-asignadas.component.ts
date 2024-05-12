@@ -16,6 +16,8 @@ export class TareasAsignadasComponent implements OnInit {
   public taskDates: string[] = [];
   public tasksList: TaskResponse[] = [];
   public uniqueColors: string[] = [];
+  public uniqueLabels: string[] = [];
+  public filteredTasks: TaskResponse[] = [];
 
   public myForm: FormGroup = this.fb.group({
     label: [''],
@@ -43,13 +45,15 @@ export class TareasAsignadasComponent implements OnInit {
         this.sortTasks();
         this.groupTasksByDate();
         this.uniqueColors = [...new Set(this.tasksList.map(task => task.color))];
+        this.uniqueLabels = [...new Set(this.tasksList.map(task => task.label))];
+
       });
   }
   groupTasksByDate() {
     this.groupedTasks = {};
 
     for (const task of this.tasksList) {
-      const date = task.date;
+      const date = task.date || 'Sin fecha';
       if (!this.groupedTasks[date]) {
         this.groupedTasks[date] = [];
       }
@@ -67,6 +71,8 @@ export class TareasAsignadasComponent implements OnInit {
         this.tasksList.push(task);
         this.sortTasks();
         this.groupTasksByDate();
+        this.uniqueColors = [...new Set(this.tasksList.map(task => task.color))];
+        this.uniqueLabels = [...new Set(this.tasksList.map(task => task.label))];
         console.log(task);
       });
 
@@ -104,6 +110,10 @@ export class TareasAsignadasComponent implements OnInit {
         const index = this.tasksList.findIndex(t => t.taskId === updatedTask.taskId);
         if (index !== -1) {
           this.tasksList[index] = updatedTask;
+          this.groupTasksByDate();
+          this.sortTasks();
+          this.uniqueColors = [...new Set(this.tasksList.map(task => task.color))];
+          this.uniqueLabels = [...new Set(this.tasksList.map(task => task.label))];
         }
       });
   }
@@ -116,4 +126,9 @@ export class TareasAsignadasComponent implements OnInit {
   sortTasks() {
     this.tasksList.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }
+
+  filterByLabel(label: string) {
+    this.filteredTasks = this.tasksList.filter(task => task.label === label);
+  }
+
 }
