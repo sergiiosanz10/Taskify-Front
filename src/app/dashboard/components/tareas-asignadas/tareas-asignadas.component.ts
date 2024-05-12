@@ -12,7 +12,8 @@ export class TareasAsignadasComponent implements OnInit {
 
   private fb = inject(FormBuilder);
   private DashboardService = inject(DashboardService);
-
+  public groupedTasks: { [key: string]: TaskResponse[] } = {};
+  public taskDates: string[] = [];
   public tasksList: TaskResponse[] = [];
 
   public myForm: FormGroup = this.fb.group({
@@ -39,30 +40,45 @@ export class TareasAsignadasComponent implements OnInit {
       .subscribe(tasks => {
         this.tasksList = tasks;
         this.sortTasks();
+        this.groupTasksByDate();
       });
   }
+  groupTasksByDate() {
+    this.groupedTasks = {};
 
-newTask() {
-  const taskData = this.myForm.value;
+    for (const task of this.tasksList) {
+      const date = task.date;
+      if (!this.groupedTasks[date]) {
+        this.groupedTasks[date] = [];
+      }
+      this.groupedTasks[date].push(task);
+    }
 
-  this.DashboardService.newTask(taskData)
-    .subscribe(task => {
-      this.tasksList.push(task);
-      this.sortTasks();
-      console.log(task);
+    this.taskDates = Object.keys(this.groupedTasks);
+  }
+
+  newTask() {
+    const taskData = this.myForm.value;
+
+    this.DashboardService.newTask(taskData)
+      .subscribe(task => {
+        this.tasksList.push(task);
+        this.sortTasks();
+        this.groupTasksByDate();
+        console.log(task);
+      });
+
+    this.myForm.reset({
+      label: '',
+      name: '',
+      description: '',
+      time_start: '',
+      time_end: '',
+      date: '',
+      color: '',
+      status: false,
     });
-
-  this.myForm.reset({
-    label: '',
-    name: '',
-    description: '',
-    time_start: '',
-    time_end: '',
-    date: '',
-    color: '',
-    status: false,
-  });
-}
+  }
 
   deleteTask(id: string) {
     const token = sessionStorage.getItem('token');
@@ -71,6 +87,8 @@ newTask() {
     this.DashboardService.deleteTask(id, token)
       .subscribe(() => {
         this.tasksList = this.tasksList.filter(task => task.taskId !== id);
+        this.groupTasksByDate();
+        this.sortTasks();
       });
   }
 
