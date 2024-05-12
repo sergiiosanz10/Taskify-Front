@@ -34,7 +34,7 @@ export class CalendarioComponent extends TareasAsignadasComponent implements OnI
     this.calendarOptions = {
       plugins: [dayGridPlugin, interactionPlugin],
       initialView: 'dayGridMonth',
-      weekends: false,
+      weekends: true,
       locale: esLocale,
       events: [],
       editable: true,

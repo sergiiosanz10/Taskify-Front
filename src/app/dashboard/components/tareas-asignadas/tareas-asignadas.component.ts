@@ -36,18 +36,33 @@ export class TareasAsignadasComponent implements OnInit {
     if (!token) return;
 
     this.DashboardService.getTasks(token)
-      .subscribe(tasks => this.tasksList = tasks);
-
+      .subscribe(tasks => {
+        this.tasksList = tasks;
+        this.sortTasks();
+      });
   }
 
-  newTask() {
-    const taskData = this.myForm.value;
+newTask() {
+  const taskData = this.myForm.value;
 
-    this.DashboardService.newTask(taskData)
-      .subscribe(task => { this.tasksList.push(task), console.log(task) });
+  this.DashboardService.newTask(taskData)
+    .subscribe(task => {
+      this.tasksList.push(task);
+      this.sortTasks();
+      console.log(task);
+    });
 
-    this.myForm.reset();
-  }
+  this.myForm.reset({
+    label: '',
+    name: '',
+    description: '',
+    time_start: '',
+    time_end: '',
+    date: '',
+    color: '',
+    status: false,
+  });
+}
 
   deleteTask(id: string) {
     const token = sessionStorage.getItem('token');
@@ -77,4 +92,8 @@ export class TareasAsignadasComponent implements OnInit {
     return this.DashboardService.isValidField(this.myForm, field)
   }
 
+
+  sortTasks() {
+    this.tasksList.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  }
 }
