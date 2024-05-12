@@ -22,7 +22,7 @@ body.light-mode {
 }
 
 body.dark-mode {
-  background-color: #161616;
+  background-color: #333333;
   color: #ffffff;
 }
 
@@ -66,8 +66,45 @@ body.dark-mode .form-control::placeholder {
   color: #ffffff;
 }
 
+body.dark-mode .card-body input {
+  border: none;
+  border-bottom: 1px solid white;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+}
 
+body.light-mode .card-body input {
+  border: none;
+  border-bottom: 1px solid black;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+}
 
+body.dark-mode .card-body input:focus {
+  box-shadow: none;
+  border-bottom: 1px solid white !important;
+  transform: scale(1.02);
+  -webkit-transform: scale(1.02);
+  -moz-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  -o-transform: scale(1.02);
+}
+
+body.light-mode .card-body input:focus {
+  box-shadow: none;
+  border-bottom: 1px solid black !important;
+  transform: scale(1.02);
+  -webkit-transform: scale(1.02);
+  -moz-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  -o-transform: scale(1.02);
+}
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
