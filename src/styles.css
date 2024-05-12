@@ -37,6 +37,12 @@ body.dark-mode .dropdown-item{
   color: #ffffff !important;
 }
 
+body.dark-mode .logout:hover{
+  background-color: #ffffff;
+  color: #212529;
+  border: 2px solid #f1f1f1;
+}
+
 body.dark-mode .fc-daygrid-day-number,
 body.dark-mode .fc-col-header-cell-cushion{
   color: #ffffff;
