@@ -15,6 +15,7 @@ export class TareasAsignadasComponent implements OnInit {
   public groupedTasks: { [key: string]: TaskResponse[] } = {};
   public taskDates: string[] = [];
   public tasksList: TaskResponse[] = [];
+  public uniqueColors: string[] = [];
 
   public myForm: FormGroup = this.fb.group({
     label: [''],
@@ -41,6 +42,7 @@ export class TareasAsignadasComponent implements OnInit {
         this.tasksList = tasks;
         this.sortTasks();
         this.groupTasksByDate();
+        this.uniqueColors = [...new Set(this.tasksList.map(task => task.color))];
       });
   }
   groupTasksByDate() {

@@ -97,7 +97,7 @@
             <span class="label-input100">Color</span>
             <input type="color" class="form-control form color" list="color-datalist" [value]="task.color" [(ngModel)]="task.color" (change)="modifyTask(task)">
             <datalist id="color-datalist">
-              <option *ngFor="let task of tasksList" [value]="task.color"></option>
+              <option *ngFor="let color of uniqueColors" [value]="color"></option>
             </datalist>
           </div>
           <div class="button-group d-flex align-items-end mt-2 mb-2 mx-3">
