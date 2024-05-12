@@ -30,10 +30,10 @@
               <input type="text" class="form-control w-100 mb-4" placeholder="Etiqueta" formControlName="label">
 
               <span class="label-input100">Nombre</span>
-              <input type="text" class="form-control w-100 mb-4" placeholder="Nombre" formControlName="name">
               <span *ngIf="isValidField('name')" class="form-text text-danger">
                 Este campo es obligatorio
               </span>
+              <input type="text" class="form-control w-100 mb-4" placeholder="Nombre" formControlName="name">
 
               <span class="label-input100">Descripción</span>
               <input type="text" class="form-control w-100 mb-4" placeholder="Descripción"

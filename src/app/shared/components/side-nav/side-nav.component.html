@@ -25,7 +25,7 @@
         <li class="nav-item mx-5">
           <label for="toggle" id="toggle-label" class='dark-mode-button'>
             <div id="toggle-div">
-                <input type="checkbox" id="toggle" onChange={toggleDarkMode} />
+                <input type="checkbox" id="toggle" (click)="toggleTheme()" />
                 <div class="clouds">
                     <div class="cloud cloud-1"></div>
                     <div class="cloud cloud-2"></div>

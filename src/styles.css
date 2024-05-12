@@ -7,7 +7,6 @@
   margin: 5px;
 }
 
-
 .time{
   width: 130px;
   margin: 5px;
@@ -16,6 +15,51 @@
 .color{
   height: 35px;
 }
+
+body.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.dark-mode {
+  background-color: #161616;
+  color: #ffffff;
+}
+
+body.dark-mode .card-body,
+body.dark-mode .card-body .label-input100,
+body.dark-mode .modal-body .label-input100,
+body.dark-mode .form-control,
+body.dark-mode .modal-body,
+body.dark-mode .dropdown-menu,
+body.dark-mode .dropdown-item{
+  background-color: #454545;
+  color: #ffffff !important;
+}
+
+body.dark-mode .fc-daygrid-day-number,
+body.dark-mode .fc-col-header-cell-cushion{
+  color: #ffffff;
+  text-decoration: none;
+}
+
+body.light-mode .fc-daygrid-day-number,
+body.light-mode .fc-col-header-cell-cushion{
+  text-decoration: none;
+}
+
+body.dark-mode input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+body.dark-mode input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+body.dark-mode .form-control::placeholder {
+  color: #ffffff;
+}
+
 
 
 /*//////////////////////////////////////////////////////////////////
