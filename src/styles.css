@@ -13,12 +13,20 @@
 }
 
 .time{
-  width: 130px;
+  width: 100px;
   margin: 5px;
 }
 
 .color{
   height: 35px;
+}
+
+.card .color{
+  width: 60px;
+}
+
+.card .date{
+  width: 140px;
 }
 
 body.light-mode {

@@ -85,7 +85,6 @@ export class CalendarioComponent extends TareasAsignadasComponent implements OnI
         startDate.setHours(startHour, startMinute);
         endDate.setHours(endHour, endMinute);
       } else {
-        // If there's no time, set the dates without time
         startDate = new Date(tarea.date.split('T')[0]);
         endDate = new Date(tarea.date.split('T')[0]);
       }

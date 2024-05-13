@@ -1,4 +1,4 @@
 export const environment = {
-  baseUrl: 'https://taskify-sergiiosanz-backend.up.railway.app',
-  baseUrldev: 'http://localhost:3000'
+  // baseUrl: 'https://taskify-sergiiosanz-backend.up.railway.app',
+  baseUrl: 'http://localhost:3000'
 }
