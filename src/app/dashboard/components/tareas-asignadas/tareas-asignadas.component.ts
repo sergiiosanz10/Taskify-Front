@@ -53,7 +53,7 @@ export class TareasAsignadasComponent implements OnInit {
     this.groupedTasks = {};
 
     for (const task of this.tasksList) {
-      const date = task.date || 'Sin fecha';
+      const date = task.date || '';
       if (!this.groupedTasks[date]) {
         this.groupedTasks[date] = [];
       }
