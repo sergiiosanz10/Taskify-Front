@@ -9,7 +9,8 @@ import { TareasPendientesComponent } from './components/tareas-pendientes/tareas
 import { TareasCompletadasComponent } from './components/tareas-completadas/tareas-completadas.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FullCalendarModule } from '@fullcalendar/angular'; 
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { GestionComponent } from './components/gestion/gestion.component'; 
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     TareasAsignadasComponent,
     TareasPendientesComponent,
     TareasCompletadasComponent,
-    CalendarioComponent
+    CalendarioComponent,
+    GestionComponent
   ],
   imports: [
     CommonModule,

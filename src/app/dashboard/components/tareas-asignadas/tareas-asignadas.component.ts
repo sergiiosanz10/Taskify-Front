@@ -42,6 +42,8 @@ export class TareasAsignadasComponent implements OnInit {
     this.DashboardService.getTasks(token)
       .subscribe(tasks => {
         this.tasksList = tasks;
+        console.log(tasks);
+
         this.sortTasks();
         this.groupTasksByDate();
         this.uniqueColors = [...new Set(this.tasksList.map(task => task.color))];

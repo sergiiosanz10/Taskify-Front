@@ -5,6 +5,7 @@ import { TareasAsignadasComponent } from './components/tareas-asignadas/tareas-a
 import { TareasPendientesComponent } from './components/tareas-pendientes/tareas-pendientes.component';
 import { TareasCompletadasComponent } from './components/tareas-completadas/tareas-completadas.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
+import { GestionComponent } from './components/gestion/gestion.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'calendario',
         component: CalendarioComponent
+      },
+      {
+        path: 'gestion',
+        component: GestionComponent
       },
       {
         path: '**',

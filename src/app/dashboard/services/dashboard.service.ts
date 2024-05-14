@@ -4,6 +4,7 @@ import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from '../../../environments/environments';
 import { TaskResponse } from '../interfaces/task.interface';
 import { FormGroup } from '@angular/forms';
+import {  User } from '../../auth/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,15 @@ export class DashboardService {
     return this.http.get<TaskResponse[]>(`${this.baseUrl}/dashboard/load-tasks`, { headers });
   }
 
+  getUsers(token: string): Observable<User[]> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<User[]>(`${this.baseUrl}/auth`, { headers });
+  }
+
+  deleteUser(id: string, token: string): Observable<void> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete<void>(`${this.baseUrl}/dashboard/gestion/${id}`, { headers });
+  }
 
   isValidField(form: FormGroup, field: string) {
     return form.controls[field].errors && form.controls[field].touched
