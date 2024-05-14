@@ -1,5 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
+import { DashboardService } from '../../../dashboard/services/dashboard.service';
+import { User } from '../../../auth/interfaces';
+import { DtoResponseGetUser } from '../../../auth/interfaces/DtoResponseGetUser';
 
 @Component({
   selector: 'side-nav',
@@ -9,6 +12,10 @@ import { AuthService } from '../../../auth/services/auth.service';
 export class SideNavComponent implements OnInit {
 
   private authService = inject(AuthService);
+  private dashboardService = inject(DashboardService);
+
+  public admin: number = 0;
+
 
   ngOnInit(): void {
     const theme = localStorage.getItem('theme');
@@ -25,6 +32,8 @@ export class SideNavComponent implements OnInit {
       body.classList.add('light-mode');
       toggle.checked = false;
     }
+
+    this.userById()
   }
 
   onLogout() {
@@ -45,5 +54,15 @@ export class SideNavComponent implements OnInit {
       localStorage.setItem('theme', 'dark-mode');
       toggle.checked = true;
     }
+  }
+
+
+  userById() {
+    const token = sessionStorage.getItem('token');
+    if (!token) return;
+
+    this.dashboardService.getUserByToken(token)
+      .subscribe(
+        (admin: DtoResponseGetUser) => this.admin = admin.user.admin);
   }
 }

@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environments';
 import { TaskResponse } from '../interfaces/task.interface';
 import { FormGroup } from '@angular/forms';
 import {  User } from '../../auth/interfaces';
+import { DtoResponseGetUser } from '../../auth/interfaces/DtoResponseGetUser';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,11 @@ export class DashboardService {
   getUsers(token: string): Observable<User[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<User[]>(`${this.baseUrl}/auth`, { headers });
+  }
+
+  getUserByToken(token: string): Observable<DtoResponseGetUser> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<DtoResponseGetUser>(`${this.baseUrl}/auth/check-token`, { headers });
   }
 
   deleteUser(id: string, token: string): Observable<void> {

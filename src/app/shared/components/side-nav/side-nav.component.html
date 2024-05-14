@@ -23,7 +23,7 @@
           <a class="nav-link items" routerLink="calendario" routerLinkActive="active">Calendario</a>
         </li>
         <li class="nav-item mx-5">
-          <a class="nav-link items" routerLink="gestion" routerLinkActive="active">Gestión</a>
+          <a class="nav-link items" routerLink="gestion" routerLinkActive="active" *ngIf="admin === 1">Gestión</a>
         </li>
         <li class="nav-item mx-5">
           <label for="toggle" id="toggle-label" class='dark-mode-button'>

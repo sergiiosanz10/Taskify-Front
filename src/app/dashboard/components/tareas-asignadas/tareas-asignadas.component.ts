@@ -42,8 +42,6 @@ export class TareasAsignadasComponent implements OnInit {
     this.DashboardService.getTasks(token)
       .subscribe(tasks => {
         this.tasksList = tasks;
-        console.log(tasks);
-
         this.sortTasks();
         this.groupTasksByDate();
         this.uniqueColors = [...new Set(this.tasksList.map(task => task.color))];
@@ -75,7 +73,6 @@ export class TareasAsignadasComponent implements OnInit {
         this.groupTasksByDate();
         this.uniqueColors = [...new Set(this.tasksList.map(task => task.color))];
         this.uniqueLabels = [...new Set(this.tasksList.map(task => task.label))];
-        console.log(task);
       });
 
     this.myForm.reset({
