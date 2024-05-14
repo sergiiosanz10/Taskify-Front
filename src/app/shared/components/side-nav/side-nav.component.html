@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg text-center" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand mx-5" routerLink="tareas-asignadas"><span class="logo"><span class='taski'>Taski</span>fy</span></a>
 
@@ -10,22 +10,22 @@
     <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
 
       <ul class="navbar-nav d-flex justify-content-center">
-        <li class="nav-item mx-5">
+        <li class="nav-item mx-4">
           <a class="nav-link items" routerLink="tareas-asignadas" routerLinkActive="active" >Tareas</a>
         </li>
-        <li class="nav-item mx-5">
+        <li class="nav-item mx-4">
           <a class="nav-link items" routerLink="tareas-pendientes" routerLinkActive="active"  >Tareas pendientes</a>
         </li>
-        <li class="nav-item mx-5">
+        <li class="nav-item mx-4">
           <a class="nav-link items" routerLink="tareas-completadas" routerLinkActive="active"  >Tareas completadas</a>
         </li>
-        <li class="nav-item mx-5">
+        <li class="nav-item mx-4">
           <a class="nav-link items" routerLink="calendario" routerLinkActive="active">Calendario</a>
         </li>
-        <li class="nav-item mx-5">
+        <li class="nav-item mx-4">
           <a class="nav-link items" routerLink="gestion" routerLinkActive="active" *ngIf="admin === 1">Gestión</a>
         </li>
-        <li class="nav-item mx-5">
+        <li class="nav-item mx-4">
           <label for="toggle" id="toggle-label" class='dark-mode-button'>
             <div id="toggle-div">
                 <input type="checkbox" id="toggle" (click)="toggleTheme()" />
@@ -50,7 +50,7 @@
             </div>
         </label>
         </li>
-        <li class="nav-item mx-5 mt-sm-0 mt-3">
+        <li class="nav-item mx-4 mt-sm-0 mt-3 d-flex justify-content-center">
           <button class="nav-link logout"(click)="onLogout()">Cerrar sesión</button>
         </li>
 

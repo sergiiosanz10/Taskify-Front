@@ -9,11 +9,11 @@
         <div class="card-body d-flex flex-wrap justify-content-between">
           <div>
             <span class="label-input100">Nombre</span>
-            <input type="text" class="form-control label" placeholder="Nombre" [value]="user.name">
+            <input type="text" class="form-control label" placeholder="Nombre" [value]="user.name" readonly>
           </div>
           <div>
             <span class="label-input100">Email</span>
-            <input type="text" class="form-control form" placeholder="Email" [value]="user.email">
+            <input type="text" class="form-control form" placeholder="Email" [value]="user.email" readonly>
           </div>
           <div class="button-group d-flex align-items-end mb-2  mx-2">
             <button class="btn btn-danger  mx-3" (click)="deleteUser(user._id)"><i
