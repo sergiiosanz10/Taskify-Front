@@ -87,36 +87,7 @@ export class TareasAsignadasComponent implements OnInit {
         this.groupedTasks?.set(date, list);
 
       }
-
-
     })
-
-    console.log(this.groupedTasks, "Grouped tasks");
-    // for (const task of this.tasksList) {
-    //   const date = task.date || '';
-    //   if (!this.groupedTasks[date]) {
-    //     this.groupedTasks[date] = [];
-    //   }
-
-    //   if(this.type()=="" || this.type()=="all"){
-
-    //     this.groupedTasks[date].push(task);
-
-    //   }
-
-    //   if(this.type()=="pending" && task.status === false){
-
-    //     this.groupedTasks[date].push(task);
-    //   }
-
-    //   if(this.type()=="complete" && task.status === true){
-
-    //     this.groupedTasks[date].push(task);
-    //   }
-
-    // }
-    // console.log(this.groupedTasks);
-    // this.taskDates = Object.keys(this.groupedTasks);
   }
   getTaskListInTheDay(date : string){
 
@@ -133,7 +104,6 @@ export class TareasAsignadasComponent implements OnInit {
   });
     if(this.filterParam != ""){
       list = list.filter(task => task.label === this.filterParam)
-
     }
     return list
   }
@@ -204,7 +174,6 @@ export class TareasAsignadasComponent implements OnInit {
   filterByLabel(label: string) {
     this.filterParam = label
     this.groupedTasks= new Map()
-    console.log(this.groupedTasks);
     this.loadTasks()
   }
 
