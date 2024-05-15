@@ -37,7 +37,8 @@
                 "glob": "**/*",
                 "input": "src/custom-assets",
                 "output": "/custom-assets/"
-              }
+              },
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.css"
@@ -58,7 +59,8 @@
                   "maximumError": "5mb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "serviceWorker": "ngsw-config.json"
             },
             "development": {
               "optimization": false,
@@ -95,7 +97,8 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.css"

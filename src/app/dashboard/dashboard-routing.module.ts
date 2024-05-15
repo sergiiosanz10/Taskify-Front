@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { TareasAsignadasComponent } from './components/tareas-asignadas/tareas-asignadas.component';
-import { TareasPendientesComponent } from './components/tareas-pendientes/tareas-pendientes.component';
-import { TareasCompletadasComponent } from './components/tareas-completadas/tareas-completadas.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { GestionComponent } from './components/gestion/gestion.component';
 
@@ -13,18 +11,6 @@ const routes: Routes = [
     component: DashboardLayoutComponent,
     children: [
       {
-        path: 'tareas-asignadas',
-        component: TareasAsignadasComponent
-      },
-      {
-        path: 'tareas-pendientes',
-        component: TareasPendientesComponent
-      },
-      {
-        path: 'tareas-completadas',
-        component: TareasCompletadasComponent
-      },
-      {
         path: 'calendario',
         component: CalendarioComponent
       },
@@ -33,12 +19,16 @@ const routes: Routes = [
         component: GestionComponent
       },
       {
-        path: '**',
-        redirectTo: 'tareas-asignadas',
+        path: ':type',
+        component: TareasAsignadasComponent
+      },
+      {
+        path: '',
+        redirectTo: 'all',
         pathMatch: 'full'
       }
     ]
-  }
+  },
 ];
 
 @NgModule({

@@ -13,10 +13,7 @@ const routes: Routes = [
     canActivate: [isAuthenticatedGuard],
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
-  {
-    path: '**',
-    redirectTo: 'auth'
-  }
+
 ];
 
 @NgModule({
