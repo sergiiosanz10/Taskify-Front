@@ -22,13 +22,9 @@
 
   <!-- Modal -->
   <shared-modal
-  [tasksList]="tasksList()"
-  [groupedTasks]="groupedTasks()"
-  [listDate]="listDate()"
-  [type]="type()"
-  [filterParam]="filterParam()"
-  >
-  </shared-modal>
+  (datoActualizado)="actualizarDato($event)"
+  />
+
 
   <!-- Task Container -->
   <div class="tareasContainer m-4">

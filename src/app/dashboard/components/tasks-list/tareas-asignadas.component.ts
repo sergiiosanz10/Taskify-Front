@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { TaskResponse } from '../../interfaces/task.interface';
 import { NavigationStart, Router } from '@angular/router';
-import { filter, map } from 'rxjs';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-tareas-asignadas',
@@ -11,11 +11,11 @@ import { filter, map } from 'rxjs';
 })
 export class TareasAsignadasComponent implements OnInit {
 
+
   private activeRoute = inject(Router)
   private DashboardService = inject(DashboardService);
 
-  // public groupedTasks: Map<string, TaskResponse[]> | undefined
-  public groupedTasks= signal<Map<string, TaskResponse[]> | undefined>(undefined)
+  public groupedTasks = signal<Map<string, TaskResponse[]> | undefined>(undefined);
   public tasksList = signal<TaskResponse[]>([]);
   public uniqueColors = signal<string[]>([]);
   public uniqueLabels = signal<string[]>([]);
@@ -44,6 +44,12 @@ export class TareasAsignadasComponent implements OnInit {
     }
   }
 
+  ngOnChanges(): void {
+    console.log();
+
+    this.loadTasks()
+
+  }
 
   loadTasks() {
     const token = sessionStorage.getItem('token');
@@ -56,7 +62,6 @@ export class TareasAsignadasComponent implements OnInit {
         this.sortTasks();
         this.uniqueColors.set([...new Set(this.tasksList().map(task => task.color))]);
         this.uniqueLabels.set([...new Set(this.tasksList().map(task => task.label))]);
-
       });
   }
 
@@ -137,6 +142,11 @@ export class TareasAsignadasComponent implements OnInit {
     this.filterParam.set(label)
     this.groupedTasks.set(new Map());
     this.loadTasks()
+  }
+
+  actualizarDato(data: TaskResponse[]): void  {
+    this.tasksList.set(data);
+    this.ngOnInit()
   }
 
 }
