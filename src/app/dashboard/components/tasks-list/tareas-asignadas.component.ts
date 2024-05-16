@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { TaskResponse } from '../../interfaces/task.interface';
-import { NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
@@ -23,37 +23,46 @@ export class TareasAsignadasComponent implements OnInit {
   public type = signal<string>('');
   public listDate = signal<string[]>([]);
 
+  constructor(private activatedRoute: ActivatedRoute){
 
-  ngOnInit() {
-
-    this.activeRoute.events.pipe(
-      filter((event) => event instanceof NavigationStart)
-    ).subscribe((event: any) => {
-      let params: string = event["url"].split("/")
-      this.type.set(params[2])
-      if (this.type() == "all" || this.type() == "pending" || this.type() == "complete") {
-        this.filterParam.set('')
-        this.loadTasks()
-      }
-      this.tasksList.set([])
-      this.listDate.set([])
-    })
-
-    if (this.type() == "") {
-      this.loadTasks()
-    }
   }
 
-  ngOnChanges(): void {
-    console.log();
 
-    this.loadTasks()
+  ngOnInit() {
+    console.log()
 
+    this.activatedRoute.params.subscribe((params: any) => {
+      console.log(params);
+      this.type.set(params.type)
+      if (this.type() == "all" || this.type() == "pending" || this.type() == "complete") {
+            this.filterParam.set('')
+            this.loadTasks()
+            console.log(this.type());
+          }
+          this.tasksList.set([])
+          this.listDate.set([])
+    });
+    // this.activeRoute.events.pipe(
+    //   filter((event) => event instanceof NavigationStart)
+    // ).subscribe((event: any) => {
+    //   let params: string = event["url"].split("/")
+    //   console.log(params[2]);
+    //   this.type.set(params[2])
+    //   if (this.type() == "all" || this.type() == "pending" || this.type() == "complete") {
+    //     this.filterParam.set('')
+    //     this.loadTasks()
+    //     console.log(this.type());
+
+    //   }
+    //   this.tasksList.set([])
+    //   this.listDate.set([])
+    // })
   }
 
   loadTasks() {
     const token = sessionStorage.getItem('token');
     if (!token) return;
+
     this.groupedTasks.set(new Map());
     this.DashboardService.getTasks(token)
       .subscribe(tasks => {
@@ -75,8 +84,9 @@ export class TareasAsignadasComponent implements OnInit {
     this.tasksList().forEach(task => {
       const date = task.date || '';
       if (!this.groupedTasks()?.has(date)) {
-        var list = this.getTaskListInTheDay(date)
-        this.listDate().push(date)
+        var list = this.getTaskListInTheDay(date);
+        console.log(list);
+        this.listDate().push(date);
         this.groupedTasks()?.set(date, list);
       }
     })
@@ -84,20 +94,20 @@ export class TareasAsignadasComponent implements OnInit {
 
   getTaskListInTheDay(date: string) {
 
-    var list = this.tasksList().filter(task => {
+    let list = this.tasksList().filter(task => {
 
-      if ((this.type() == "all" || this.type() == "" || this.type == undefined) && task.date === date) {
+      if ((this.type() === "all" || this.type == undefined) && task.date === date) {
         return true;
-      } else if (this.type() == "pending" && task.date === date && task.status === false) {
+      } else if (this.type() === "pending" && task.date === date && task.status === false) {
         return true;
-      } else if (this.type() == "complete" && task.date == date && task.status === true) {
+      } else if (this.type() === "complete" && task.date === date && task.status === true) {
         return true;
       }
       return false;
     });
 
     if (this.filterParam() != "") {
-      list = list.filter(task => task.label === this.filterParam())
+      list = list.filter(task => task.label === this.filterParam());
     }
     return list
   }
@@ -144,7 +154,7 @@ export class TareasAsignadasComponent implements OnInit {
     this.loadTasks()
   }
 
-  actualizarDato(data: TaskResponse[]): void  {
+  actualizarDato(data: TaskResponse[]): void {
     this.tasksList.set(data);
     this.ngOnInit()
   }
