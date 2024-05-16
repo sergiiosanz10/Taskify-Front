@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, catchError, map, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../../environments/environments';
 import { TaskResponse } from '../interfaces/task.interface';
 import { FormGroup } from '@angular/forms';
@@ -14,7 +14,6 @@ export class DashboardService {
 
   private http = inject(HttpClient);
   private readonly baseUrl: string = environment.baseUrl;
-
 
   constructor() { }
 
@@ -75,5 +74,4 @@ export class DashboardService {
   isValidField(form: FormGroup, field: string) {
     return form.controls[field].errors && form.controls[field].touched
   }
-
 }

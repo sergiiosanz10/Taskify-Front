@@ -1,7 +1,9 @@
 <div class="container-fluid">
   <div class="row mt-4">
     <div class="col-12 d-flex justify-content-center align-items-center">
-      <h1 class="titulo mx-2">Tareas</h1>
+      <h1 class="titulo mx-2" *ngIf="type === 'all' || type === ''">Tareas</h1>
+      <h1 class="titulo mx-2" *ngIf="type === 'pending'">Tareas pendientes</h1>
+      <h1 class="titulo mx-2" *ngIf="type === 'complete'">Tareas completadas</h1>
       <button class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#taskModal">
         <i class="fas fa-file-circle-plus"></i>
       </button>
@@ -134,5 +136,5 @@
 
     </div>
   </div>
-  <!-- <shared-alert *ngIf="groupedTasks!.keys.length<=0"></shared-alert> -->
+  <shared-alert *ngIf="listDate.length <= 0 "></shared-alert>
 </div>

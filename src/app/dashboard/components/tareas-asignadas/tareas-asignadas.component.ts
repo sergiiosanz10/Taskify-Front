@@ -16,14 +16,14 @@ export class TareasAsignadasComponent implements OnInit {
   private fb = inject(FormBuilder);
   private DashboardService = inject(DashboardService);
 
-  public groupedTasks: Map<string,TaskResponse[]> | undefined
-  public taskDates: string[] = [];
+  public groupedTasks: Map<string, TaskResponse[]> | undefined
   public tasksList: TaskResponse[] = [];
   public uniqueColors: string[] = [];
   public uniqueLabels: string[] = [];
-  public filterParam  : string = "";
-  public type : string = ""
-  public listDate: string[] = []
+  public filterParam: string = "";
+  public type: string = "";
+  public listDate: string[] = [];
+
   public myForm: FormGroup = this.fb.group({
     label: [''],
     name: ['', [Validators.required]],
@@ -35,13 +35,15 @@ export class TareasAsignadasComponent implements OnInit {
     status: [false],
   })
 
-  constructor(){
+
+  ngOnInit() {
+
     this.activeRoute.events.pipe(
       filter((event) => event instanceof NavigationStart)
-    ).subscribe((event : any) => {
-      let params : string= event["url"].split("/")
+    ).subscribe((event: any) => {
+      let params: string = event["url"].split("/")
       this.type = params[2]
-      if(this.type=="all" || this.type=="pending" || this.type=="complete"){
+      if (this.type == "all" || this.type == "pending" || this.type == "complete") {
         this.filterParam = ""
         this.loadTasks()
       }
@@ -49,12 +51,7 @@ export class TareasAsignadasComponent implements OnInit {
       this.listDate = []
     })
 
-
-  }
-
-  ngOnInit() {
-
-    if(this.type==""){
+    if (this.type == "") {
       this.loadTasks()
     }
   }
@@ -75,34 +72,37 @@ export class TareasAsignadasComponent implements OnInit {
       });
   }
 
-   groupTasksByDate() {
+  groupTasksByDate() {
+    //Limpio el Map
     this.groupedTasks = new Map();
-    this.listDate=[]
-    console.log(this.type);
-    this.tasksList.forEach(task => {
-      const date = task.date ||'';
-      if (!this.groupedTasks?.has(date)) {
-        this.listDate.push(date)
-        var list = this.getTaskListInTheDay(date)
-        this.groupedTasks?.set(date, list);
 
+    //Limpio la lista de fechas
+    this.listDate = []
+
+    this.tasksList.forEach(task => {
+      const date = task.date || '';
+      if (!this.groupedTasks?.has(date)) {
+        var list = this.getTaskListInTheDay(date)
+        this.listDate.push(date)
+        this.groupedTasks?.set(date, list);
       }
     })
   }
-  getTaskListInTheDay(date : string){
+  getTaskListInTheDay(date: string) {
 
     var list = this.tasksList.filter(task => {
 
-      if ((this.type == "all" || this.type == "" || this.type == undefined )&& task.date === date) {
-          return true;
+      if ((this.type == "all" || this.type == "" || this.type == undefined) && task.date === date) {
+        return true;
       } else if (this.type == "pending" && task.date === date && task.status === false) {
-          return true;
+        return true;
       } else if (this.type == "complete" && task.date == date && task.status === true) {
-          return true;
+        return true;
       }
       return false;
-  });
-    if(this.filterParam != ""){
+    });
+
+    if (this.filterParam != "") {
       list = list.filter(task => task.label === this.filterParam)
     }
     return list
@@ -173,7 +173,7 @@ export class TareasAsignadasComponent implements OnInit {
 
   filterByLabel(label: string) {
     this.filterParam = label
-    this.groupedTasks= new Map()
+    this.groupedTasks = new Map()
     this.loadTasks()
   }
 

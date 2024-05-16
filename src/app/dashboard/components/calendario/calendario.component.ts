@@ -13,16 +13,16 @@ import interactionPlugin from '@fullcalendar/interaction';
   templateUrl: './calendario.component.html',
   styleUrls: ['./calendario.component.css']
 })
-export class CalendarioComponent extends TareasAsignadasComponent implements OnInit {
-  calendarOptions?: CalendarOptions;
+export class CalendarioComponent  implements OnInit {
   @ViewChild('eventTemplate') eventTemplate?: TemplateRef<any>;
 
+  public calendarOptions?: CalendarOptions;
+  public tasksList: TaskResponse[] = []
 
   constructor(private dashboardService: DashboardService) {
-    super();
   }
 
-  override ngOnInit() {
+   ngOnInit() {
     const token = sessionStorage.getItem('token');
     if (!token) return;
 
@@ -31,6 +31,7 @@ export class CalendarioComponent extends TareasAsignadasComponent implements OnI
         this.tasksList = tasks;
         this.onTasksChanged(this.tasksList);
       });
+
     this.calendarOptions = {
       plugins: [dayGridPlugin, interactionPlugin],
       initialView: 'dayGridMonth',
