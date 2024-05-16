@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
-import { TareasAsignadasComponent } from './components/tareas-asignadas/tareas-asignadas.component';
+import { TareasAsignadasComponent } from './components/tasks-list/tareas-asignadas.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { GestionComponent } from './components/gestion/gestion.component';
 

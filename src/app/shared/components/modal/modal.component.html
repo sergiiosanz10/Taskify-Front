@@ -1,0 +1,42 @@
+<div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h1 class="text-center mb-4">Crear nueva tarea</h1>
+        <form [formGroup]="myForm">
+          <div class="mb-3">
+            <span class="label-input100">Etiqueta</span>
+            <input type="text" class="form-control w-100 mb-4" placeholder="Etiqueta" formControlName="label">
+
+            <span class="label-input100">Nombre</span>
+            <span *ngIf="isValidField('name')" class="form-text text-danger">
+              Este campo es obligatorio
+            </span>
+            <input type="text" class="form-control w-100 mb-4" placeholder="Nombre" formControlName="name">
+
+            <span class="label-input100">Descripción</span>
+            <input type="text" class="form-control w-100 mb-4" placeholder="Descripción"
+              formControlName="description">
+
+            <span class="label-input100">Hora comienzo</span>
+            <input type="time" class="form-control w-100 mb-4" formControlName="time_start">
+
+            <span class="label-input100">Hora fin</span>
+            <input type="time" class="form-control w-100 mb-4" formControlName="time_end">
+
+            <span class="label-input100">Fecha</span>
+            <input type="date" class="form-control w-100 mb-4" formControlName="date">
+
+            <span class="label-input100">Color</span>
+            <input type="color" class="form-control color mb-5 mb-4" list="color-datalist" formControlName="color">
+          </div>
+          <div class="buttons d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary" (click)="newTask()"
+              [disabled]="myForm.invalid">Crear</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,7 @@ import { CalendarOptions, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import esLocale from '@fullcalendar/core/locales/es'; // Import Spanish locale
 import { TaskResponse } from '../../interfaces/task.interface';
-import { TareasAsignadasComponent } from '../tareas-asignadas/tareas-asignadas.component';
+import { TareasAsignadasComponent } from '../tasks-list/tareas-asignadas.component';
 import interactionPlugin from '@fullcalendar/interaction';
 
 

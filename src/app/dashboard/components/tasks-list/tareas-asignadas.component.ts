@@ -1,5 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { TaskResponse } from '../../interfaces/task.interface';
 import { NavigationStart, Router } from '@angular/router';
@@ -13,7 +12,6 @@ import { filter } from 'rxjs';
 export class TareasAsignadasComponent implements OnInit {
 
   private activeRoute = inject(Router)
-  private fb = inject(FormBuilder);
   private DashboardService = inject(DashboardService);
 
   public groupedTasks: Map<string, TaskResponse[]> | undefined
@@ -23,17 +21,6 @@ export class TareasAsignadasComponent implements OnInit {
   public filterParam: string = "";
   public type: string = "";
   public listDate: string[] = [];
-
-  public myForm: FormGroup = this.fb.group({
-    label: [''],
-    name: ['', [Validators.required]],
-    description: [''],
-    time_start: [''],
-    time_end: [''],
-    date: [''],
-    color: [''],
-    status: [false],
-  })
 
 
   ngOnInit() {
@@ -88,6 +75,7 @@ export class TareasAsignadasComponent implements OnInit {
       }
     })
   }
+
   getTaskListInTheDay(date: string) {
 
     var list = this.tasksList.filter(task => {
@@ -108,29 +96,6 @@ export class TareasAsignadasComponent implements OnInit {
     return list
   }
 
-  newTask() {
-    const taskData = this.myForm.value;
-
-    this.DashboardService.newTask(taskData)
-      .subscribe(task => {
-        this.tasksList.push(task);
-        this.sortTasks();
-        this.groupTasksByDate();
-        this.uniqueColors = [...new Set(this.tasksList.map(task => task.color))];
-        this.uniqueLabels = [...new Set(this.tasksList.map(task => task.label))];
-      });
-
-    this.myForm.reset({
-      label: '',
-      name: '',
-      description: '',
-      time_start: '',
-      time_end: '',
-      date: '',
-      color: '',
-      status: false,
-    });
-  }
 
   deleteTask(id: string) {
     const token = sessionStorage.getItem('token');
@@ -160,10 +125,6 @@ export class TareasAsignadasComponent implements OnInit {
           this.uniqueLabels = [...new Set(this.tasksList.map(task => task.label))];
         }
       });
-  }
-
-  isValidField(field: string) {
-    return this.DashboardService.isValidField(this.myForm, field)
   }
 
 
