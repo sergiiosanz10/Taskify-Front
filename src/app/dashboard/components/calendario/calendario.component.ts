@@ -1,11 +1,12 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+
 import { DashboardService } from '../../services/dashboard.service';
+import { TaskResponse } from '../../interfaces/task.interface';
+
 import { CalendarOptions, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import esLocale from '@fullcalendar/core/locales/es'; // Import Spanish locale
-import { TaskResponse } from '../../interfaces/task.interface';
-import { TareasAsignadasComponent } from '../tasks-list/tareas-asignadas.component';
 import interactionPlugin from '@fullcalendar/interaction';
+import esLocale from '@fullcalendar/core/locales/es'; // Import Spanish locale
 
 
 @Component({

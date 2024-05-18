@@ -42,21 +42,6 @@ export class TareasAsignadasComponent implements OnInit {
           this.tasksList.set([])
           this.listDate.set([])
     });
-    // this.activeRoute.events.pipe(
-    //   filter((event) => event instanceof NavigationStart)
-    // ).subscribe((event: any) => {
-    //   let params: string = event["url"].split("/")
-    //   console.log(params[2]);
-    //   this.type.set(params[2])
-    //   if (this.type() == "all" || this.type() == "pending" || this.type() == "complete") {
-    //     this.filterParam.set('')
-    //     this.loadTasks()
-    //     console.log(this.type());
-
-    //   }
-    //   this.tasksList.set([])
-    //   this.listDate.set([])
-    // })
   }
 
   loadTasks() {
@@ -83,9 +68,8 @@ export class TareasAsignadasComponent implements OnInit {
 
     this.tasksList().forEach(task => {
       const date = task.date || '';
-      if (!this.groupedTasks()?.has(date)) {
-        var list = this.getTaskListInTheDay(date);
-        console.log(list);
+      var list = this.getTaskListInTheDay(date);
+      if (list.length > 0) {
         this.listDate().push(date);
         this.groupedTasks()?.set(date, list);
       }
