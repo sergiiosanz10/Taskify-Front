@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center align-items-center auth" style="height: 100vh;">
+  <form class="login100-form register-box" autocomplete="off" [formGroup]="myForm">
+
+  <span class="login100-form-title pb-3">
+    Registrarse
+  </span>
+
+  <div class="wrap-input100 mb-3">
+    <span class="label-input100">Nombre</span>
+    <input class="input100"
+         type="text"
+         placeholder="Nombre"
+         formControlName="name"
+         >
+    <span class="focus-input100"></span>
+  </div>
+
+  <div class="wrap-input100 mb-3">
+    <span class="label-input100">Correo</span>
+    <input class="input100"
+         type="email"
+         placeholder="Correo electrónico"
+         formControlName="email"
+         >
+    <span class="focus-input100"></span>
+  </div>
+
+  <div class="wrap-input100 mb-3">
+    <span class="label-input100">Contraseña</span>
+    <input class="input100"
+         type="password"
+         placeholder="Ingrese su contraseña"
+         formControlName="password"
+         >
+    <span class="focus-input100"></span>
+  </div>
+
+  <div class="wrap-input100 pb-1">
+    <span class="label-input100"> Confirmar contraseña</span>
+    <input class="input100"
+         type="password"
+         placeholder="Confirmar contraseña"
+         formControlName="password2"
+         >
+    <span class="focus-input100"></span>
+  </div>
+
+
+  <div class="container-login100-form-btn mt-4">
+    <div class="wrap-login100-form-btn">
+      <div class="login100-form-bgbtn"></div>
+      <button class="login100-form-btn"
+          type="submit"
+          (click)="register()"
+          >
+        Registrarse
+      </button>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column justify-content-center align-items-center m-5">
+    <span class="txt1 p-b-17">
+      ¿Ya tienes cuenta?
+    </span>
+
+    <a routerLink="/portfolio/projects/auth/login" class="txt2">
+      Inicia sesion aquí
+    </a>
+  </div>
+  </form>
+
+</div>

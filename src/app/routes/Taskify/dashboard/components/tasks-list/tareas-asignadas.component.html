@@ -1,0 +1,106 @@
+<div class="container-fluid p-0">
+  <div class="row mt-4">
+    <div class="col-12 d-flex justify-content-center align-items-center p-0">
+      <h1 class="titulo mx-2" *ngIf="type() === 'all' || type() === ''">Tareas</h1>
+      <h1 class="titulo mx-2" *ngIf="type() === 'pending'">Tareas pendientes</h1>
+      <h1 class="titulo mx-2" *ngIf="type() === 'complete'">Tareas completadas</h1>
+      <button class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#taskModal">
+        <i class="fas fa-file-circle-plus"></i>
+      </button>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle filtro" type="button" id="dropdownMenuButton"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-filter"></i>
+        </button>
+        <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton">
+          <li *ngIf="!uniqueLabels().includes('')">
+            <a class="dropdown-item p-0 mb-1 p-1 filter-label rounded" *ngFor="let label of uniqueLabels()" (click)="filterByLabel(label)">{{label}}</a>
+          </li>
+          <li *ngIf="uniqueLabels().includes('') || uniqueLabels().length === 0">
+            <span class="dropdown-item">No hay etiquetas</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <shared-modal
+  (datoActualizado)="actualizarDato($event)"
+  [uniqueLabels]="uniqueLabels"
+  />
+
+  <!-- Task Container -->
+  <div class="tareasContainer m-4" *ngIf="!isLoading()">
+    <div *ngFor="let date of listDate()">
+
+      <div *ngIf="groupedTasks() && groupedTasks()?.get(date)!= undefined">
+        <div *ngIf="groupedTasks()?.get(date)?.length != undefined && groupedTasks()?.get(date)!.length > 0">
+          <h6 class="mt-3">{{ date | date:'dd/MM/yyyy' }}</h6>
+          <hr>
+          @for (task of groupedTasks()?.get(date); track $index) {
+          <div class="card mt-3 mx-lg-4 mx-xl-4">
+            <div class="card-body d-flex flex-wrap justify-content-between align-items-center">
+              <div>
+                <span class="label-input100">Etiqueta</span>
+                <input type="text" class="form-control label" placeholder="Etiqueta" [value]="task.label"
+                  [(ngModel)]="task.label" (change)="modifyTask(task)">
+              </div>
+              <div>
+                <span class="label-input100">Nombre</span>
+                <input type="text" class="form-control form" placeholder="Nombre" [value]="task.name"
+                  [(ngModel)]="task.name" (change)="modifyTask(task)">
+              </div>
+              <div>
+                <span class="label-input100">Descripción</span>
+                <input type="text" class="form-control description" placeholder="Descripción" [value]="task.description"
+                  [(ngModel)]="task.description" (change)="modifyTask(task)">
+              </div>
+              <div>
+                <span class="label-input100">Hora comienzo</span>
+                <input type="time" class="form-control time" [value]="task.time_start" [(ngModel)]="task.time_start"
+                  (change)="modifyTask(task)">
+              </div>
+              <div>
+                <span class="label-input100">Hora fin</span>
+                <input type="time" class="form-control time" [value]="task.time_end" [(ngModel)]="task.time_end"
+                  (change)="modifyTask(task)">
+              </div>
+              <div>
+                <span class="label-input100">Fecha</span>
+                <input type="date" class="form-control form date" [value]="task.date" [(ngModel)]="task.date"
+                  (change)="modifyTask(task)">
+              </div>
+              <div>
+                <span class="label-input100">Color</span>
+                <input type="color" class="form-control form color" list="color-datalist" [value]="task.color"
+                  [(ngModel)]="task.color" (change)="modifyTask(task)">
+                <datalist id="color-datalist">
+                  <option *ngFor="let color of uniqueColors()" [value]="color"></option>
+                </datalist>
+              </div>
+              <div class="button-group d-flex align-items-end mt-2 mb-2">
+                <button [ngClass]="{'btn-success': task.status, 'btn-warning': !task.status}"
+                  class="btn text-white  mx-3" (click)="task.status = !task.status; modifyTask(task)">
+                  <i *ngIf="!task.status" class="fa-solid fa-clock mx-1"></i>
+                  <i *ngIf="task.status" class="fa-solid fa-check mx-1"></i>
+                </button>
+                <button class="btn btn-danger mx-3" (click)="deleteTask(task.taskId)">
+                  <i class="fas fa-trash mx-1"></i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+          }
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <shared-loadging-spiner class="d-flex align-items-center justify-content-center pt-5" *ngIf="isLoading()"></shared-loadging-spiner>
+
+  <shared-alert *ngIf="listDate().length === 0 && !isLoading() && type() === 'all'" [message]="'¡¡No hay tareas asignadas!!'"></shared-alert>
+  <shared-alert *ngIf="listDate().length === 0 && !isLoading() && type() === 'pending'" [message]="'¡¡No hay tareas pendientes!!'" [alertType]="'alert-success'"></shared-alert>
+  <shared-alert *ngIf="listDate().length === 0 && !isLoading() && type() === 'complete'" [message]="'¡¡No has completado ninguna tarea!!'" [alertType]="'alert-warning'"></shared-alert>
+</div>

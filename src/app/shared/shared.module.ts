@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { RouterModule } from '@angular/router';
 import { AlertComponent } from './components/alert/alert.component';
+import { LoadgingSpinerComponent } from './components/loadging-spiner/loadging-spiner.component';
 
 
 
@@ -10,6 +11,7 @@ import { AlertComponent } from './components/alert/alert.component';
   declarations: [
     SideNavComponent,
     AlertComponent,
+    LoadgingSpinerComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { AlertComponent } from './components/alert/alert.component';
   ],
   exports: [
     SideNavComponent,
-    AlertComponent
+    AlertComponent,
+    LoadgingSpinerComponent
   ]
 })
 export class SharedModule { }

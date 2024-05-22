@@ -6,7 +6,10 @@
         <form [formGroup]="myForm">
           <div class="mb-3">
             <span class="label-input100">Etiqueta</span>
-            <input type="text" class="form-control w-100 mb-4" placeholder="Etiqueta" formControlName="label">
+            <input type="text" class="form-control w-100 mb-4" placeholder="Etiqueta" formControlName="label" list="datalistOptions" id="labelsDataList">
+            <datalist id="datalistOptions">
+              <option  *ngFor="let label of uniqueLabels()" [value]="label">
+            </datalist>
 
             <span class="label-input100">Nombre</span>
             <span *ngIf="isValidField('name')" class="form-text text-danger">

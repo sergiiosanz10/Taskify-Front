@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-center align-items-center auth" style="height: 100vh;">
+  <form class="login100-form box" autocomplete="off" [formGroup]="myForm">
+
+    <span class="login100-form-title pb-3">
+      Login
+    </span>
+
+    <div class="wrap-input100 mb-4">
+      <span class="label-input100">Correo</span>
+      <input class="input100" type="email" placeholder="Correo electrónico" formControlName="email">
+      <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 mb-4">
+      <span class="label-input100">Contraseña</span>
+      <input class="input100" type="password" placeholder="Ingrese su contraseña" formControlName="password">
+      <span class="focus-input100"></span>
+    </div>
+
+    <div class="text-right pt-1 pb-3"></div>
+
+    <div class="container-login100-form-btn">
+      <div class="wrap-login100-form-btn">
+        <div class="login100-form-bgbtn"></div>
+        <button class="login100-form-btn" type="submit" [disabled]="myForm.invalid" (click)="login()">
+          Login
+        </button>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column justify-content-center align-items-center pt-5">
+      <span class="txt1 pb-1">
+        ¿No tienes cuenta?
+      </span>
+
+      <a routerLink="/auth/register" class="txt2">
+        Crear una aquí
+      </a>
+    </div>
+  </form>
+</div>

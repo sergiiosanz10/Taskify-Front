@@ -1,8 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { AuthService } from '../../../auth/services/auth.service';
-import { DashboardService } from '../../../dashboard/services/dashboard.service';
-import { User } from '../../../auth/interfaces';
-import { DtoResponseGetUser } from '../../../auth/interfaces/DtoResponseGetUser';
+import { AuthService } from '../../services/auth.service';
+import { DashboardService } from '../../services/dashboard.service';
+import { DtoResponseGetUser } from '../../interfaces/DtoResponseGetUser';
 
 @Component({
   selector: 'side-nav',
