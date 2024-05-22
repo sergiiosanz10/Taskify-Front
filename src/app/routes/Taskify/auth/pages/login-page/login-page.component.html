@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center align-items-center auth" style="height: 100vh;">
+<div class="d-flex justify-content-center align-items-center auth" style="height: 100vh;" *ngIf="isLoading()">
   <form class="login100-form box" autocomplete="off" [formGroup]="myForm">
 
     <span class="login100-form-title pb-3">
@@ -39,3 +39,4 @@
     </div>
   </form>
 </div>
+<shared-loading-spiner *ngIf="!isLoading()" [color]="'white'" class="d-flex justify-content-center align-items-center" style="height: 100vh;"></shared-loading-spiner>

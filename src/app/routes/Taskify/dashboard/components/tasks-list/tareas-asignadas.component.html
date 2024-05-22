@@ -98,7 +98,7 @@
 
     </div>
   </div>
-  <shared-loadging-spiner class="d-flex align-items-center justify-content-center pt-5" *ngIf="isLoading()"></shared-loadging-spiner>
+  <shared-loading-spiner class="d-flex align-items-center justify-content-center pt-5" *ngIf="isLoading()"></shared-loading-spiner>
 
   <shared-alert *ngIf="listDate().length === 0 && !isLoading() && type() === 'all'" [message]="'¡¡No hay tareas asignadas!!'"></shared-alert>
   <shared-alert *ngIf="listDate().length === 0 && !isLoading() && type() === 'pending'" [message]="'¡¡No hay tareas pendientes!!'" [alertType]="'alert-success'"></shared-alert>

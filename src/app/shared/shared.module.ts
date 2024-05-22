@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { RouterModule } from '@angular/router';
 import { AlertComponent } from './components/alert/alert.component';
-import { LoadgingSpinerComponent } from './components/loadging-spiner/loadging-spiner.component';
+import { LoadingSpinerComponent } from './components/loading-spiner/loading-spiner.component';
 
 
 
@@ -11,7 +11,7 @@ import { LoadgingSpinerComponent } from './components/loadging-spiner/loadging-s
   declarations: [
     SideNavComponent,
     AlertComponent,
-    LoadgingSpinerComponent
+    LoadingSpinerComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +20,7 @@ import { LoadgingSpinerComponent } from './components/loadging-spiner/loadging-s
   exports: [
     SideNavComponent,
     AlertComponent,
-    LoadgingSpinerComponent
+    LoadingSpinerComponent
   ]
 })
 export class SharedModule { }

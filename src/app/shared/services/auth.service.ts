@@ -82,17 +82,8 @@ export class AuthService {
 
   checkAuthStatus(): Observable<boolean> {
     const url = `${this.baseUrl}/auth/check-token`;
-    const token = sessionStorage.getItem('token')
 
-    if (!token) {
-      this.logout()
-      return of(false)
-    }
-
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${token}`)
-
-    return this.http.get<CheckTokenResponse>(url, { headers })
+    return this.http.get<CheckTokenResponse>(url)
       .pipe(
         map(({ user, token }) => this.setAuthenticated(user, token)),
         catchError(() => {
@@ -107,6 +98,4 @@ export class AuthService {
     this._currentUser.set(null);
     this._authStatus.set(AuthStatus.noAuthenticated);
   }
-
-
 }
