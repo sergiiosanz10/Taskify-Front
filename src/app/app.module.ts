@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { JwtInterceptor } from './shared/services/interceptors/jwt-interceptor';
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    SharedModule
   ],
   providers: [
     provideAnimationsAsync(),
